@@ -20,16 +20,19 @@ jobs:
           - ubuntu-24.04-arm
           - macos-15
     runs-on: ${{ matrix.os }}
+    permissions:
+      contents: read
+      actions: read
     steps:
       - uses: actions/checkout@v7
-      - uses: canidae-solutions/lix-quick-install-action@v5
+      # Bootstrap release
+      - uses: ./
         with:
           lix_archives_url: https://github.com/canidae-solutions/lix-quick-install-action/releases/download/v5.0.0
           lix_version: 2.95.2
-      - uses: cachix/cachix-action@v17
+      - uses: Mic92/hestia@v3
         with:
-          name: canidae-solutions
-          signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
+          upstream-cache-filter: true
       - name: Fix Lix tests
         if: matrix.os == 'ubuntu-24.04-arm'
         run: |
@@ -102,20 +105,13 @@ jobs:
           lix_version: ${{ matrix.version }}
       - uses: cachix/cachix-action@v17
         with:
-          name: canidae-solutions
-          signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
-          skipPush: true
+          name: nix-community
       - name: Verify nix config
         run: |
-          if ! egrep -q "^substituters = https://cache.nixos.org https://canidae-solutions.cachix.org$" "$HOME/.config/nix/nix.conf"; then
+          if ! egrep -q "^substituters = https://cache.nixos.org https://nix-community.cachix.org$" "$HOME/.config/nix/nix.conf"; then
             echo "Invalid substituters config"
             exit 1
           fi
-      - name: Push to Cachix
-        if: github.event_name == 'push' && github.repository_owner == 'canidae-solutions'
-        run: |
-          dd if=/dev/urandom of=random count=1
-          cachix push canidae-solutions "$(nix add-to-store random)"
 
   release:
     runs-on: ubuntu-latest
@@ -126,6 +122,7 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     permissions:
       contents: write
+      actions: read
     steps:
       - uses: actions/checkout@v7
       - uses: actions/download-artifact@v8
@@ -144,10 +141,9 @@ jobs:
         with:
           lix_archives_url: file:///tmp/archives
           lix_version: 2.96.0
-      - uses: cachix/cachix-action@v17
+      - uses: Mic92/hestia@v3
         with:
-          name: canidae-solutions
-          signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
+          upstream-cache-filter: true
       - name: Build release script
         run: nix build -f default.nix releaseScript
       - name: Release if needed
