@@ -31,7 +31,7 @@ let
   # future.
   lixVersionsForSystem = system: [
     lixPackageSets.lix_2_95.lix
-    lixPackageSets.lix_2_94.lix
+    lixPackageSets.lix_2_96.lix
   ];
 in
 rec {

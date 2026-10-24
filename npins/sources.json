@@ -1,11 +1,10 @@
 {
   "pins": {
     "nixpkgs": {
-      "type": "Channel",
-      "name": "nixos-26.05",
-      "artifact": "nixexprs.tar.xz",
-      "url": "https://releases.nixos.org/nixos/26.05/nixos-26.05.8409.f4f698677b11/nixexprs.tar.xz",
-      "hash": "sha256-tbu/95O8ZRmCj0kfSiDvz3YT7GSnD0fO6cxLRVYtXnU="
+      "type": "Url",
+      "url": "https://channels.nixos.org/nixos-unstable/nixexprs.tar.zst",
+      "unpack": true,
+      "hash": "sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv+bWAr4V8YeKBw="
     }
   },
   "version": 8

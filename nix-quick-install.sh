@@ -20,6 +20,10 @@ esac
 
 case "$OSTYPE" in
   darwin*)
+    if [ "$arch" = "x86_64" ]; then
+      echo >&2 "x86_64-darwin (intel macos) is no longer supported"
+      exit 1
+    fi
     sys="$arch-darwin"
     ;;
   linux*)

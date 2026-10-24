@@ -6,7 +6,7 @@ sets up [lix](https://lix.systems/) in single-user mode on github actions, reall
 
 - how fast? ~5 seconds tops, in our testing
 - deterministic installs - get the same lix install, every time
-- supports all linux and macos runners
+- supports all linux and apple silicon macos runners
 - lets you configure the lix install exactly how you need it
 
 getting started only takes one extra line in your workflows:

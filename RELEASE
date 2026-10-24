@@ -1,5 +1,6 @@
-v5.0.0
+v6.0.0
 
 ## changes
-- add support for lix 2.95
-- drop support for lix 2.93
+- add support for lix 2.96
+- drop support for lix 2.94
+- drop support for x86_64-darwin (intel macos)

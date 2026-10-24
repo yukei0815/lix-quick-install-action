@@ -19,7 +19,6 @@ jobs:
           - ubuntu-22.04
           - ubuntu-24.04-arm
           - macos-15
-          - macos-15-intel
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v7
@@ -55,10 +54,9 @@ jobs:
           - ubuntu-22.04
           - ubuntu-24.04-arm
           - macos-15
-          - macos-15-intel
         version:
-          - 2.95.2
-          - 2.94.2
+          - 2.96.0
+          # - 2.95.2
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v7
@@ -88,10 +86,9 @@ jobs:
           - ubuntu-22.04
           - ubuntu-24.04-arm
           - macos-15
-          - macos-15-intel
         version:
-          - 2.95.2
-          - 2.94.2
+          - 2.96.0
+          #  - 2.95.2
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v7
@@ -141,16 +138,12 @@ jobs:
           path: /tmp/archives
       - uses: actions/download-artifact@v8
         with:
-          name: lix-archives-macOS-X64
-          path: /tmp/archives
-      - uses: actions/download-artifact@v8
-        with:
           name: lix-archives-macOS-ARM64
           path: /tmp/archives
       - uses: ./
         with:
           lix_archives_url: file:///tmp/archives
-          lix_version: 2.95.2
+          lix_version: 2.96.0
       - uses: cachix/cachix-action@v17
         with:
           name: canidae-solutions
