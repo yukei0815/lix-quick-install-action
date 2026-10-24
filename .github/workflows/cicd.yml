@@ -25,11 +25,10 @@ jobs:
       actions: read
     steps:
       - uses: actions/checkout@v7
-      # Bootstrap release
       - uses: ./
         with:
-          lix_archives_url: https://github.com/canidae-solutions/lix-quick-install-action/releases/download/v5.0.0
-          lix_version: 2.95.2
+          lix_archives_url: https://github.com/yukei0815/lix-quick-install-action/releases/download/v6.0.0
+          lix_version: 2.96.0
       - uses: Mic92/hestia@v3
         with:
           upstream-cache-filter: true
